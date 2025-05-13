@@ -1,0 +1,63 @@
+#include&lt;stdio.h&gt;
+#include&lt;conio.h&gt;
+#include&lt;stdlib.h&gt;
+#define MAX 50
+int can_place(int c[],int r)
+{
+int i;
+for(i=0;i&lt;r;i++)
+if(c[i]==c[r] || (abs(c[i]-c[r])==abs(i-r)))
+return 0;
+return 1;
+}
+void display(int c[],int n)
+{
+int i,j;
+char cb[10][10];
+for(i=0;i&lt;n;i++)
+for(j=0;j&lt;n;j++)
+cb[i][j]=&#39;-&#39;;
+for(i=0;i&lt;n;i++)
+cb[i][c[i]]=&#39;Q&#39;;
+
+for(i=0;i&lt;n;i++)
+{
+for(j=0;j&lt;n;j++)
+printf(&quot;%c&quot;,cb[i][j]);
+printf(&quot;\n&quot;);
+}
+}
+void n_queens(int n)
+{
+int r;
+int c[MAX];
+/*if(n==2 || n==3){
+printf(&quot;No solution for n=2 or n=3&quot;);
+}*/
+c[0]=-1;
+r=0;
+while(r&gt;=0)
+{ c[r]++;
+while(c[r]&lt;n &amp;&amp; !can_place(c,r))
+c[r]++;
+if(c[r]&lt;n){
+if(r==n-1)
+{
+
+display(c,n);
+printf(&quot;\n\n&quot;);}
+else{
+r++;
+c[r]=-1;
+}}
+else
+r--;
+}}
+void main()
+{
+int n;
+printf(&quot;\nEnter the no. of queens:&quot;);
+scanf(&quot;%d&quot;,&amp;n);
+n_queens(n);
+getch();
+}
